@@ -1,5 +1,9 @@
 # React Decoupler
 
+### Note
+
+The original project is available at https://www.npmjs.com/package/react-decoupler, and is the work of Tommy Groshong. Unfortunately, the package hasn't been updated in a long time and the github repository has been archived by the owner. I still need to use this in some legacy projects that I am working on, and so I have done a very simple update to the dependencies and configuration to allow it to be used with React 18. The existing tests are all running and passing and things seem to be working. I make no garuantees that this is a stable or reliable upgrade however.
+
 ## Overview
 
 React Decoupler is a simple dependency injection / service locator utility
@@ -57,7 +61,11 @@ ReactDOM.render(
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { DecouplerProvider, ServiceLocator, useServices } from 'react-decoupler';
+import {
+  DecouplerProvider,
+  ServiceLocator,
+  useServices,
+} from 'react-decoupler';
 import apiClient from './myApiClient';
 
 const locator = new ServiceLocator();
@@ -66,21 +74,20 @@ locator.register('apiClient', apiClient);
 function App() {
   const [apiClient] = useServices(['apiClient']);
   const [loading, setLoading] = React.useState(false);
-  const [data, setData] = React.useState([])
+  const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
-    apiClient.loadData().then(setData).finally(() => setLoading(false))
+    apiClient
+      .loadData()
+      .then(setData)
+      .finally(() => setLoading(false));
   }, [apiClient]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  return (
-    <div>
-      {/* do stuff with data*/}
-    </div>
-  );
+  return <div>{/* do stuff with data*/}</div>;
 }
 
 ReactDOM.render(
