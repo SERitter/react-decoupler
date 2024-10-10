@@ -1,9 +1,9 @@
-import babel from '@rollup/plugin-babel';
+import replace from '@rollup/plugin-replace';
+import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import size from 'rollup-plugin-size';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import replace from '@rollup/plugin-replace';
+import { babel } from '@rollup/plugin-babel';
 
 const PACKAGE_NAME = 'ReactDecoupler';
 const FILE_BASE_NAME = 'react-decoupler';
@@ -16,6 +16,17 @@ const globals = {
 
 const input = 'src/index.js';
 
+const babelOptions = {
+  exclude: /node_modules/,
+  babelHelpers: 'bundled',
+  babelrc: true,
+};
+
+const replaceOptions = {
+  exclude: 'node_modules/**',
+  preventAssignment: true,
+};
+
 export default [
   {
     input,
@@ -27,11 +38,11 @@ export default [
     external,
     plugins: [
       replace({
-        exclude: 'node_modules/**',
+        ...replaceOptions,
         'process.env.NODE_ENV': JSON.stringify('dev'),
       }),
       nodeResolve(),
-      babel({ exclude: /node_modules/, babelHelpers: 'bundled' }),
+      babel(babelOptions),
       commonjs(),
     ],
   },
@@ -45,11 +56,11 @@ export default [
     external,
     plugins: [
       replace({
-        exclude: 'node_modules/**',
+        ...replaceOptions,
         'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       nodeResolve(),
-      babel({ exclude: /node_modules/, babelHelpers: 'bundled' }),
+      babel(babelOptions),
       commonjs(),
       terser(),
     ],
@@ -66,11 +77,11 @@ export default [
     external,
     plugins: [
       replace({
-        exclude: 'node_modules/**',
+        ...replaceOptions,
         'process.env.NODE_ENV': JSON.stringify('dev'),
       }),
       nodeResolve(),
-      babel({ exclude: /node_modules/, babelHelpers: 'bundled' }),
+      babel(babelOptions),
       commonjs(),
     ],
   },
@@ -86,11 +97,11 @@ export default [
     external,
     plugins: [
       replace({
-        exclude: 'node_modules/**',
+        ...replaceOptions,
         'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       nodeResolve(),
-      babel({ exclude: /node_modules/, babelHelpers: 'bundled' }),
+      babel(babelOptions),
       commonjs(),
       terser(),
       size(),
