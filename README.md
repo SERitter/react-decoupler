@@ -2,7 +2,9 @@
 
 ### Note
 
-The original project is available at https://www.npmjs.com/package/react-decoupler, and is the work of Tommy Groshong. Unfortunately, the package hasn't been updated in a long time and the github repository has been archived by the owner. I still need to use this in some legacy projects that I am working on, and so I have done a very simple update to the dependencies and configuration to allow it to be used with React 18. The existing tests are all running and passing and things seem to be working. I make no garuantees that this is a stable or reliable upgrade however.
+I have removed the react-decoupler and react-decoupler-react-18 implementations from my project. I am no longer using this code, nor do I have a need to ensure that it is still working properly in react 18.
+
+The original project is available at https://www.npmjs.com/package/react-decoupler, and is the work of Tommy Groshong. Unfortunately, the package hasn't been updated in a long time and the github repository has been archived by the owner. I still need to use this in some legacy projects that I am working on, and so I have done a very simple update to the dependencies and configuration to allow it to be used with React 18. The existing tests are all running and passing and things seem to be working. I make no guarantees that this is a stable or reliable upgrade however.
 
 ## Overview
 
